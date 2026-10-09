@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER: Greeting -->
+  <header class="greeting-section">
+    <div class="greeting-left">
+      <p class="greeting-label" id="greeting-text">Selamat Pagi</p>
+      <h1 class="greeting-name" id="greeting-name">Pengguna</h1>
+    </div>
+    <div class="greeting-right">
+      <p class="clock" id="clock">00:00:00</p>
+      <p class="date" id="date">Senin, 1 Januari 2025</p>
+      <button class="theme-toggle" id="theme-toggle" title="Ganti mode terang/gelap" aria-label="Toggle tema">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-label">Mode Gelap</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- NAME MODAL -->
+  <div class="modal-overlay" id="name-modal">
+    <div class="modal">
+      <h2>Halo! 👋</h2>
+      <p>Siapa namamu?</p>
+      <input type="text" id="name-input" placeholder="Masukkan namamu..." maxlength="30" />
+      <button class="btn btn-primary" id="save-name-btn">Simpan</button>
+    </div>
+  </div>
+
+  <main class="dashboard">
+
+    <!-- COLUMN LEFT: Focus Timer + Quick Links -->
+    <aside class="col-left">
+
+      <!-- FOCUS TIMER -->
+      <section class="card timer-card">
+        <div class="card-header">
+          <h2 class="card-title">⏱ Focus Timer</h2>
+          <button class="icon-btn" id="timer-settings-btn" title="Atur durasi">⚙️</button>
+        </div>
+
+        <!-- Timer Settings Panel -->
+        <div class="timer-settings hidden" id="timer-settings-panel">
+          <label for="custom-minutes">Durasi (menit):</label>
+          <input type="number" id="custom-minutes" min="1" max="120" value="25" />
+          <button class="btn btn-sm btn-primary" id="apply-timer-btn">Terapkan</button>
+        </div>
+
+        <div class="timer-display">
+          <svg class="timer-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="54" />
+            <circle class="ring-progress" id="ring-progress" cx="60" cy="60" r="54" />
+          </svg>
+          <span class="timer-text" id="timer-text">25:00</span>
+        </div>
+        <div class="timer-controls">
+          <button class="btn btn-primary" id="start-btn">▶ Start</button>
+          <button class="btn btn-secondary" id="stop-btn">⏸ Stop</button>
+          <button class="btn btn-ghost" id="reset-btn">↺ Reset</button>
+        </div>
+        <p class="timer-status" id="timer-status">Siap memulai sesi fokus</p>
+      </section>
+
+      <!-- QUICK LINKS -->
+      <section class="card links-card">
+        <div class="card-header">
+          <h2 class="card-title">🔗 Quick Links</h2>
+          <button class="icon-btn" id="add-link-btn" title="Tambah link">+</button>
+        </div>
+
+        <!-- Add Link Form -->
+        <div class="link-form hidden" id="link-form">
+          <input type="text" id="link-name-input" placeholder="Nama (mis. Google)" maxlength="30" />
+          <input type="url" id="link-url-input" placeholder="URL (mis. https://google.com)" />
+          <div class="form-actions">
+            <button class="btn btn-sm btn-primary" id="save-link-btn">Simpan</button>
+            <button class="btn btn-sm btn-ghost" id="cancel-link-btn">Batal</button>
+          </div>
+        </div>
+
+        <div class="links-grid" id="links-grid">
+          <!-- Links rendered by JS -->
+        </div>
+        <p class="empty-hint" id="links-empty">Belum ada tautan. Klik <strong>+</strong> untuk menambah.</p>
+      </section>
+
+    </aside>
+
+    <!-- COLUMN RIGHT: To-Do List -->
+    <section class="col-right">
+      <div class="card todo-card">
+        <div class="card-header">
+          <h2 class="card-title">✅ To-Do List</h2>
+          <span class="todo-count" id="todo-count">0 tugas</span>
+        </div>
+
+        <!-- Add Task Form -->
+        <div class="todo-input-row">
+          <input type="text" id="todo-input" placeholder="Tambah tugas baru..." maxlength="100" />
+          <button class="btn btn-primary" id="add-todo-btn">Tambah</button>
+        </div>
+
+        <!-- Filter -->
+        <div class="todo-filters">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="active">Aktif</button>
+          <button class="filter-btn" data-filter="done">Selesai</button>
+        </div>
+
+        <!-- Task List -->
+        <ul class="todo-list" id="todo-list">
+          <!-- Tasks rendered by JS -->
+        </ul>
+
+        <div class="todo-footer" id="todo-footer">
+          <p class="empty-hint" id="todo-empty">Belum ada tugas. Ayo tambahkan! 🎯</p>
+          <button class="btn btn-ghost btn-sm clear-done-btn hidden" id="clear-done-btn">🗑 Hapus semua selesai</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- EDIT TASK MODAL -->
+  <div class="modal-overlay hidden" id="edit-modal">
+    <div class="modal">
+      <h2>Edit Tugas</h2>
+      <input type="text" id="edit-input" placeholder="Edit tugas..." maxlength="100" />
+      <div class="form-actions">
+        <button class="btn btn-primary" id="save-edit-btn">Simpan</button>
+        <button class="btn btn-ghost" id="cancel-edit-btn">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
